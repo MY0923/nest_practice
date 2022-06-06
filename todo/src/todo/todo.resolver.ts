@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PrismaService } from 'src/prisma.service';
-import { Todo } from './todo.model';
+import { Todo } from './models/todo.model';
 
 @Resolver(() => Todo)
 export class TodoResolver {
@@ -8,12 +8,12 @@ export class TodoResolver {
 
 
   @Query(() => [Todo])
-  async todo() {
+  async read() {
     return this.prisma.todo.findMany();
   }
   
 
-  @Mutation(() => Todo)
+  @Mutation(() => [Todo])
   async createTodo(
     @Args('title') title: string,
     @Args('created_at') created_at: Date,
@@ -22,4 +22,9 @@ export class TodoResolver {
   ) {
     return this.prisma.todo.create({ data: { title, created_at, updated_at, done } });
   }
+
+  // @Mutation(returns => Todo)
+  // async updateTodo(@Args({ name: 'todoId', type: () => Int }) todoId: number) {
+  //   return this.prisma.todo.upvoteById({ id: todoId });
+  // }
 }
