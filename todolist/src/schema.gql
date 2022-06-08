@@ -1,0 +1,325 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UsersCount {
+  todo: Int!
+}
+
+type Users {
+  id: ID!
+  name: String!
+  todo: [Todo!]
+  _count: UsersCount!
+}
+
+type Todo {
+  id: ID!
+  title: String!
+  done: Boolean!
+  users: Users
+  userId: Int
+}
+
+type Query {
+  todo(where: TodoWhereInput, orderBy: [TodoOrderByWithRelationInput!], cursor: TodoWhereUniqueInput, take: Int, skip: Int, distinct: [TodoScalarFieldEnum!]): Todo!
+  readTodo(where: TodoWhereInput, orderBy: [TodoOrderByWithRelationInput!], cursor: TodoWhereUniqueInput, take: Int, skip: Int, distinct: [TodoScalarFieldEnum!]): [Todo!]!
+  user(where: UsersWhereInput, orderBy: [UsersOrderByWithRelationInput!], cursor: UsersWhereUniqueInput, take: Int, skip: Int, distinct: [UsersScalarFieldEnum!]): Users!
+  readUsers(where: UsersWhereInput, orderBy: [UsersOrderByWithRelationInput!], cursor: UsersWhereUniqueInput, take: Int, skip: Int, distinct: [UsersScalarFieldEnum!]): [Users!]!
+}
+
+input TodoWhereInput {
+  AND: [TodoWhereInput!]
+  OR: [TodoWhereInput!]
+  NOT: [TodoWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  done: BoolFilter
+  users: UsersRelationFilter
+  userId: IntNullableFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input UsersRelationFilter {
+  is: UsersWhereInput
+  isNot: UsersWhereInput
+}
+
+input UsersWhereInput {
+  AND: [UsersWhereInput!]
+  OR: [UsersWhereInput!]
+  NOT: [UsersWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  todo: TodoListRelationFilter
+}
+
+input TodoListRelationFilter {
+  every: TodoWhereInput
+  some: TodoWhereInput
+  none: TodoWhereInput
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input TodoOrderByWithRelationInput {
+  id: SortOrder
+  title: SortOrder
+  done: SortOrder
+  users: UsersOrderByWithRelationInput
+  userId: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input UsersOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  todo: TodoOrderByRelationAggregateInput
+}
+
+input TodoOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TodoWhereUniqueInput {
+  id: Int
+}
+
+enum TodoScalarFieldEnum {
+  id
+  title
+  createdAt
+  updatedAt
+  done
+  userId
+}
+
+input UsersWhereUniqueInput {
+  id: Int
+}
+
+enum UsersScalarFieldEnum {
+  id
+  name
+}
+
+type Mutation {
+  createTodo(data: TodoCreateInput!): Todo!
+  deleteTodo(where: TodoWhereUniqueInput!): Todo!
+  updateTodo(data: TodoUpdateInput!, where: TodoWhereUniqueInput!): Todo!
+  createUser(data: UsersCreateInput!): Users!
+  deleteUsers(where: UsersWhereUniqueInput!): Users!
+  updateUsers(data: UsersUpdateInput!, where: UsersWhereUniqueInput!): Users!
+}
+
+input TodoCreateInput {
+  title: String!
+  done: Boolean
+  users: UsersCreateNestedOneWithoutTodoInput
+}
+
+input UsersCreateNestedOneWithoutTodoInput {
+  create: UsersCreateWithoutTodoInput
+  connectOrCreate: UsersCreateOrConnectWithoutTodoInput
+  connect: UsersWhereUniqueInput
+}
+
+input UsersCreateWithoutTodoInput {
+  name: String!
+}
+
+input UsersCreateOrConnectWithoutTodoInput {
+  where: UsersWhereUniqueInput!
+  create: UsersCreateWithoutTodoInput!
+}
+
+input TodoUpdateInput {
+  title: StringFieldUpdateOperationsInput
+  done: BoolFieldUpdateOperationsInput
+  users: UsersUpdateOneWithoutTodoInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input UsersUpdateOneWithoutTodoInput {
+  create: UsersCreateWithoutTodoInput
+  connectOrCreate: UsersCreateOrConnectWithoutTodoInput
+  upsert: UsersUpsertWithoutTodoInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: UsersWhereUniqueInput
+  update: UsersUpdateWithoutTodoInput
+}
+
+input UsersUpsertWithoutTodoInput {
+  update: UsersUpdateWithoutTodoInput!
+  create: UsersCreateWithoutTodoInput!
+}
+
+input UsersUpdateWithoutTodoInput {
+  name: StringFieldUpdateOperationsInput
+}
+
+input UsersCreateInput {
+  name: String!
+  todo: TodoCreateNestedManyWithoutUsersInput
+}
+
+input TodoCreateNestedManyWithoutUsersInput {
+  create: [TodoCreateWithoutUsersInput!]
+  connectOrCreate: [TodoCreateOrConnectWithoutUsersInput!]
+  connect: [TodoWhereUniqueInput!]
+}
+
+input TodoCreateWithoutUsersInput {
+  title: String!
+  done: Boolean
+}
+
+input TodoCreateOrConnectWithoutUsersInput {
+  where: TodoWhereUniqueInput!
+  create: TodoCreateWithoutUsersInput!
+}
+
+input UsersUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  todo: TodoUpdateManyWithoutUsersInput
+}
+
+input TodoUpdateManyWithoutUsersInput {
+  create: [TodoCreateWithoutUsersInput!]
+  connectOrCreate: [TodoCreateOrConnectWithoutUsersInput!]
+  upsert: [TodoUpsertWithWhereUniqueWithoutUsersInput!]
+  set: [TodoWhereUniqueInput!]
+  disconnect: [TodoWhereUniqueInput!]
+  delete: [TodoWhereUniqueInput!]
+  connect: [TodoWhereUniqueInput!]
+  update: [TodoUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [TodoUpdateManyWithWhereWithoutUsersInput!]
+  deleteMany: [TodoScalarWhereInput!]
+}
+
+input TodoUpsertWithWhereUniqueWithoutUsersInput {
+  where: TodoWhereUniqueInput!
+  update: TodoUpdateWithoutUsersInput!
+  create: TodoCreateWithoutUsersInput!
+}
+
+input TodoUpdateWithoutUsersInput {
+  title: StringFieldUpdateOperationsInput
+  done: BoolFieldUpdateOperationsInput
+}
+
+input TodoUpdateWithWhereUniqueWithoutUsersInput {
+  where: TodoWhereUniqueInput!
+  data: TodoUpdateWithoutUsersInput!
+}
+
+input TodoUpdateManyWithWhereWithoutUsersInput {
+  where: TodoScalarWhereInput!
+  data: TodoUpdateManyMutationInput!
+}
+
+input TodoScalarWhereInput {
+  AND: [TodoScalarWhereInput!]
+  OR: [TodoScalarWhereInput!]
+  NOT: [TodoScalarWhereInput!]
+  id: IntFilter
+  title: StringFilter
+  done: BoolFilter
+  userId: IntNullableFilter
+}
+
+input TodoUpdateManyMutationInput {
+  title: StringFieldUpdateOperationsInput
+  done: BoolFieldUpdateOperationsInput
+}

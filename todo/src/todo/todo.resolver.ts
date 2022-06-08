@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PrismaService } from 'src/prisma.service';
-import { Todo } from './models/todo.model';
+import { Todo } from './todo.model';
 
 @Resolver(() => Todo)
 export class TodoResolver {
