@@ -20,4 +20,7 @@ export class UsersScalarWhereWithAggregatesInput {
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     name?: StringWithAggregatesFilter;
+
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    password?: StringWithAggregatesFilter;
 }

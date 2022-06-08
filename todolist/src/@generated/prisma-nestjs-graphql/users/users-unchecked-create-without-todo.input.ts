@@ -12,4 +12,8 @@ export class UsersUncheckedCreateWithoutTodoInput {
     @Field(() => String, {nullable:false})
     @Validator.IsNotEmpty()
     name!: string;
+
+    @Field(() => String, {nullable:false})
+    @Validator.MinLength(8)
+    password!: string;
 }

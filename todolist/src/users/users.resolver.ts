@@ -1,17 +1,21 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Users } from 'src/@generated/prisma-nestjs-graphql/users/users.model'
+import * as bcrypt from 'bcrypt';
 import { CreateOneUsersArgs } from 'src/@generated/prisma-nestjs-graphql/users/create-one-users.args';
 import { UsersService } from 'src/users/users.service';
 import { FindFirstUsersArgs } from 'src/@generated/prisma-nestjs-graphql/users/find-first-users.args';
 import { FindManyUsersArgs } from 'src/@generated/prisma-nestjs-graphql/users/find-many-users.args';
 import { DeleteOneUsersArgs } from 'src/@generated/prisma-nestjs-graphql/users/delete-one-users.args';
 import { UpdateOneUsersArgs } from 'src/@generated/prisma-nestjs-graphql/users/update-one-users.args';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Resolver(() => Users)
 export class UsersResolver {
-    constructor(private readonly usersService: UsersService) {}
+    constructor(private readonly usersService: UsersService) { }
 
     @Query(() => Users)
+    @UseGuards(JwtAuthGuard)
     user(
         @Args() args: FindFirstUsersArgs
     ) {
@@ -23,6 +27,7 @@ export class UsersResolver {
     async createUser(
         @Args() args: CreateOneUsersArgs
     ) {
+        args.data.password = await bcrypt.hash(args.data.password, 10);
         return this.usersService.createUser(args);
     }
 
@@ -40,12 +45,12 @@ export class UsersResolver {
         @Args() args: DeleteOneUsersArgs
     ) {
         return this.usersService.deleteOneUsers(args);
-    }    
+    }
 
     //更新
     @Mutation(() => Users)
     async updateUsers(
-        @Args() args: UpdateOneUsersArgs    
+        @Args() args: UpdateOneUsersArgs
     ) {
         return this.usersService.updateUser(args);
     }

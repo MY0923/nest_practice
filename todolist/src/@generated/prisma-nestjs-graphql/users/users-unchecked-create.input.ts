@@ -14,6 +14,10 @@ export class UsersUncheckedCreateInput {
     @Validator.IsNotEmpty()
     name!: string;
 
+    @Field(() => String, {nullable:false})
+    @Validator.MinLength(8)
+    password!: string;
+
     @Field(() => TodoUncheckedCreateNestedManyWithoutUsersInput, {nullable:true})
     todo?: TodoUncheckedCreateNestedManyWithoutUsersInput;
 }

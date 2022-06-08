@@ -8,4 +8,8 @@ export class UsersCreateWithoutTodoInput {
     @Field(() => String, {nullable:false})
     @Validator.IsNotEmpty()
     name!: string;
+
+    @Field(() => String, {nullable:false})
+    @Validator.MinLength(8)
+    password!: string;
 }

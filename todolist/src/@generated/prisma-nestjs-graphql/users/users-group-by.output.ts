@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { UsersCountAggregate } from './users-count-aggregate.output';
 import { UsersAvgAggregate } from './users-avg-aggregate.output';
 import { UsersSumAggregate } from './users-sum-aggregate.output';
@@ -15,6 +16,9 @@ export class UsersGroupBy {
 
     @Field(() => String, {nullable:false})
     name!: string;
+
+    @HideField()
+    password!: string;
 
     @Field(() => UsersCountAggregate, {nullable:true})
     _count?: UsersCountAggregate;

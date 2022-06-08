@@ -1,9 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { Todo } from '../todo/todo.model';
 import { UsersCount } from './users-count.output';
-
 
 @ObjectType()
 export class Users {
@@ -13,6 +13,9 @@ export class Users {
 
     @Field(() => String, {nullable:false})
     name!: string;
+
+    @HideField()
+    password!: string;
 
     @Field(() => [Todo], {nullable:true})
     todo?: Array<Todo>;

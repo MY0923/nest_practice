@@ -32,6 +32,9 @@ model Users {
   id          Int       @id @default(autoincrement())
   /// @Validator.IsNotEmpty()
   name       String 
+  /// @HideField()
+  /// @Validator.MinLength(8)
+  password    String
   todo       Todo[]
 }
 

@@ -110,6 +110,7 @@ input UsersWhereInput {
   NOT: [UsersWhereInput!]
   id: IntFilter
   name: StringFilter
+  password: StringFilter
   todo: TodoListRelationFilter
 }
 
@@ -157,6 +158,7 @@ enum SortOrder {
 input UsersOrderByWithRelationInput {
   id: SortOrder
   name: SortOrder
+  password: SortOrder
   todo: TodoOrderByRelationAggregateInput
 }
 
@@ -184,6 +186,7 @@ input UsersWhereUniqueInput {
 enum UsersScalarFieldEnum {
   id
   name
+  password
 }
 
 type Mutation {
@@ -209,6 +212,7 @@ input UsersCreateNestedOneWithoutTodoInput {
 
 input UsersCreateWithoutTodoInput {
   name: String!
+  password: String!
 }
 
 input UsersCreateOrConnectWithoutTodoInput {
@@ -247,10 +251,12 @@ input UsersUpsertWithoutTodoInput {
 
 input UsersUpdateWithoutTodoInput {
   name: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
 }
 
 input UsersCreateInput {
   name: String!
+  password: String!
   todo: TodoCreateNestedManyWithoutUsersInput
 }
 
@@ -272,6 +278,7 @@ input TodoCreateOrConnectWithoutUsersInput {
 
 input UsersUpdateInput {
   name: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
   todo: TodoUpdateManyWithoutUsersInput
 }
 

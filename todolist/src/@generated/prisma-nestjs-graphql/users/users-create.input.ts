@@ -10,6 +10,10 @@ export class UsersCreateInput {
     @Validator.IsNotEmpty()
     name!: string;
 
+    @Field(() => String, {nullable:false})
+    @Validator.MinLength(8)
+    password!: string;
+
     @Field(() => TodoCreateNestedManyWithoutUsersInput, {nullable:true})
     todo?: TodoCreateNestedManyWithoutUsersInput;
 }
