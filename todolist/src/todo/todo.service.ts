@@ -8,10 +8,22 @@ import { FindManyTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/find
 import { DeleteOneTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/delete-one-todo.args';
 import { UpdateManyTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/update-many-todo.args';
 import { UpdateOneTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/update-one-todo.args';
+import { Subscription } from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
+
+/*
+PubSubインスタンスを作成。。
+*/
+const pubsub = new PubSub();
 
 @Injectable()
 export class TodoService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prisma: PrismaService) { }
+
+    @Subscription(() => Todo, { name: 'todoAdded', },)
+    async todoAdded() {
+        return pubsub.asyncIterator('todoAdded');
+    }
 
     async findFirst(args: FindFirstTodoArgs): Promise<Todo | null> {
         return this.prisma.todo.findFirst(args);
@@ -23,7 +35,10 @@ export class TodoService {
 
     //作成
     async createTodo(args: CreateOneTodoArgs): Promise<Todo> {
-        return this.prisma.todo.create(args);
+        const newTodo = this.prisma.todo.create(args);
+        pubsub.publish('todoAdded', { todoAdded: newTodo });
+        //publishしたらいつも通りmutationの戻り値を返してる。
+        return newTodo;
     }
     //参照
     async findMany(args: FindManyTodoArgs): Promise<Todo[]> {
@@ -38,4 +53,5 @@ export class TodoService {
     async updateTodo(args: UpdateOneTodoArgs): Promise<Todo> {
         return this.prisma.todo.update(args);
     }
+
 }
