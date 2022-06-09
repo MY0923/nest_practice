@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { Todo } from 'src/@generated/prisma-nestjs-graphql/todo/todo.model'
 import { CreateOneTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/create-one-todo.args';
 import { TodoService } from 'src/todo/todo.service';
@@ -7,9 +7,13 @@ import { FindManyTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/find
 import { DeleteOneTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/delete-one-todo.args';
 import { UpdateOneTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/update-one-todo.args';
 
+
+
 @Resolver(() => Todo)
 export class TodoResolver {
-    constructor(private readonly todoService: TodoService) {}
+    constructor(private readonly todoService: TodoService) { }
+
+    
 
     @Query(() => Todo)
     todo(
@@ -40,12 +44,12 @@ export class TodoResolver {
         @Args() args: DeleteOneTodoArgs
     ) {
         return this.todoService.deleteOneTodo(args);
-    }    
+    }
 
     //更新
     @Mutation(() => Todo)
     async updateTodo(
-        @Args() args: UpdateOneTodoArgs    
+        @Args() args: UpdateOneTodoArgs
     ) {
         return this.todoService.updateTodo(args);
     }
