@@ -12,6 +12,9 @@ export class UsersMinAggregate {
     @Field(() => String, {nullable:true})
     name?: string;
 
+    @Field(() => String, {nullable:true})
+    email?: string;
+
     @HideField()
     password?: string;
 }

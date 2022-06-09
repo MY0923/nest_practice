@@ -10,6 +10,9 @@ export class UsersUpdateInput {
     name?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     password?: StringFieldUpdateOperationsInput;
 
     @Field(() => TodoUpdateManyWithoutUsersInput, {nullable:true})

@@ -7,4 +7,7 @@ export class UsersWhereUniqueInput {
 
     @Field(() => Int, {nullable:true})
     id?: number;
+
+    @Field(() => String, {nullable:true})
+    email?: string;
 }

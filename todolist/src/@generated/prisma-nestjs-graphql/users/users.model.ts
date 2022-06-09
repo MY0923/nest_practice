@@ -14,6 +14,12 @@ export class Users {
     @Field(() => String, {nullable:false})
     name!: string;
 
+    /**
+     * @Validator.@IsEmail()
+     */
+    @Field(() => String, {nullable:false,description:'@Validator.@IsEmail()'})
+    email!: string;
+
     @HideField()
     password!: string;
 

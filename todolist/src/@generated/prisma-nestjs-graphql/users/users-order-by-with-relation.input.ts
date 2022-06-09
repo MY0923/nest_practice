@@ -13,6 +13,9 @@ export class UsersOrderByWithRelationInput {
     name?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    email?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
 
     @Field(() => TodoOrderByRelationAggregateInput, {nullable:true})

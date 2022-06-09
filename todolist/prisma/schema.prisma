@@ -32,6 +32,8 @@ model Users {
   id          Int       @id @default(autoincrement())
   /// @Validator.IsNotEmpty()
   name       String 
+  /// @Validator.@IsEmail()
+  email       String    @unique
   /// @HideField()
   /// @Validator.MinLength(8)
   password    String

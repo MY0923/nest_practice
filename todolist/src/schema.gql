@@ -9,6 +9,9 @@ type UsersCount {
 type Users {
   id: ID!
   name: String!
+
+  """@Validator.@IsEmail()"""
+  email: String!
   todo: [Todo!]
   _count: UsersCount!
 }
@@ -19,6 +22,11 @@ type Todo {
   done: Boolean!
   users: Users
   userId: Int
+}
+
+type LoginResponse {
+  access_token: String!
+  user: Users!
 }
 
 type Query {
@@ -110,6 +118,7 @@ input UsersWhereInput {
   NOT: [UsersWhereInput!]
   id: IntFilter
   name: StringFilter
+  email: StringFilter
   password: StringFilter
   todo: TodoListRelationFilter
 }
@@ -158,6 +167,7 @@ enum SortOrder {
 input UsersOrderByWithRelationInput {
   id: SortOrder
   name: SortOrder
+  email: SortOrder
   password: SortOrder
   todo: TodoOrderByRelationAggregateInput
 }
@@ -181,11 +191,13 @@ enum TodoScalarFieldEnum {
 
 input UsersWhereUniqueInput {
   id: Int
+  email: String
 }
 
 enum UsersScalarFieldEnum {
   id
   name
+  email
   password
 }
 
@@ -196,6 +208,7 @@ type Mutation {
   createUser(data: UsersCreateInput!): Users!
   deleteUsers(where: UsersWhereUniqueInput!): Users!
   updateUsers(data: UsersUpdateInput!, where: UsersWhereUniqueInput!): Users!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
 }
 
 input TodoCreateInput {
@@ -212,6 +225,7 @@ input UsersCreateNestedOneWithoutTodoInput {
 
 input UsersCreateWithoutTodoInput {
   name: String!
+  email: String!
   password: String!
 }
 
@@ -251,11 +265,13 @@ input UsersUpsertWithoutTodoInput {
 
 input UsersUpdateWithoutTodoInput {
   name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
 }
 
 input UsersCreateInput {
   name: String!
+  email: String!
   password: String!
   todo: TodoCreateNestedManyWithoutUsersInput
 }
@@ -278,6 +294,7 @@ input TodoCreateOrConnectWithoutUsersInput {
 
 input UsersUpdateInput {
   name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
   todo: TodoUpdateManyWithoutUsersInput
 }
@@ -329,4 +346,9 @@ input TodoScalarWhereInput {
 input TodoUpdateManyMutationInput {
   title: StringFieldUpdateOperationsInput
   done: BoolFieldUpdateOperationsInput
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
 }

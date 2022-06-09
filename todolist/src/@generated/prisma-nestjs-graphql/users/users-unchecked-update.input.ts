@@ -14,6 +14,9 @@ export class UsersUncheckedUpdateInput {
     name?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     password?: StringFieldUpdateOperationsInput;
 
     @Field(() => TodoUncheckedUpdateManyWithoutUsersInput, {nullable:true})

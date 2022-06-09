@@ -23,6 +23,9 @@ export class UsersWhereInput {
     name?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
+    email?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
     password?: StringFilter;
 
     @Field(() => TodoListRelationFilter, {nullable:true})
