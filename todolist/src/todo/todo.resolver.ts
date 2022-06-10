@@ -11,9 +11,7 @@ import { UpdateOneTodoArgs } from 'src/@generated/prisma-nestjs-graphql/todo/upd
 
 @Resolver(() => Todo)
 export class TodoResolver {
-    constructor(private readonly todoService: TodoService) { }
-
-    
+    constructor(private readonly todoService: TodoService) { }  
 
     @Query(() => Todo)
     todo(
