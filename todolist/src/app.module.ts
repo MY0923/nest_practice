@@ -8,6 +8,7 @@ import { TodoModule } from './todo/todo.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { SdkStorageModule } from './sdk-storage/sdk-storage.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthModule } from './auth/auth.module';
     TodoModule,
     UsersModule,
     AuthModule,
+    SdkStorageModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
